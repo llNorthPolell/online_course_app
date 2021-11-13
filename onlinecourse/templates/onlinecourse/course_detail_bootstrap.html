@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-     {% load static %}
+    {% load static %}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -72,11 +72,12 @@
             -->
 
             <!-- A choice submission form example -->
-                <form id="questionform" action="point to a submit view" method="post">
-                        {% for lesson in course.lesson_set.all %}
-                            {% for question in lesson.question_set.all %}
+                <form id="questionform" action="{% url 'onlinecourse:submit' course.pk %}" method="post">
+                    {% csrf_token %}
+                    {% for lesson in course.lesson_set.all %}
+                        {% for question in lesson.question_set.all %}
                             <div class="card mt-1">
-                                <div class="card-header"><h5>{{ question.question_text}}</h5></div>
+                                <div class="card-header"><h5>{{question.question_text}}</h5></div>
                                 {% csrf_token %}
                                 <div class="form-group">
                                 {% for choice in question.choice_set.all %}
@@ -90,12 +91,11 @@
                                 {% endfor %}
                                 </div>
                             </div>
-                            {% endfor %}
                         {% endfor %}
-                        <input class="btn btn-success btn-block" type="submit" value="Submit">
+                    {% endfor %}
+                    <input class="btn btn-success btn-block" type="submit" value="Submit">
                 </form> 
-            {% else %}
-                <p>You must sign in to see the exam...</p>
+
             {% endif %}
             </div>
             
