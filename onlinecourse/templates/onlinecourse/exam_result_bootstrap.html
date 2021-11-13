@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     {% load static %}
-    <link rel="stylesheet" href="{% static 'onlinecourse/course.css' %}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
@@ -58,13 +57,13 @@
                             {% for choice in question.choice_set.all %}
                             {% if choice.is_correct %}
                                 {% if choice in selected_ids %}
-                                <p class="success">Correct answer: {{choice.choice_text}}</p>
+                                <p class="text-success">Correct answer: {{choice.choice_text}}</p>
                                 {% else %}
-                                <p class="warning">Not selected: {{choice.choice_text}}</p>
+                                <p class="text-warning">Not selected: {{choice.choice_text}}</p>
                                 {% endif %}
                             {% else %}
                                 {% if choice in selected_ids %}
-                                <p class="danger">Wrong answer: {{choice.choice_text}}</p>
+                                <p class="text-danger">Wrong answer: {{choice.choice_text}}</p>
                                 {% else %}
                                 <p>{{choice.choice_text}}</p>
                                 {% endif %}
